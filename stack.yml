@@ -1,24 +1,3 @@
-#
-#     stack.yml
-#     
-#     SCRIPT FOR DOCKER COMPOSER. THIS SCRIPTS
-#     GENERATES A DOCKER CONTAINER WITH THE 
-#     FOLLOWING SERVICES:
-#     
-#     a) mysql5-db: MySQL 5.7 
-#     b) mysql5-adminer: MySql Web Admin
-#          
-#     TO BUILD:
-#     docker-compose build
-#     
-#     TO RUN:
-#     docker-compose up -d
-#     
-#     TO STOP:
-#     +34 626 23 26 06 Antonieta
-#     antonieta.martin@gmail.com
-#     docker-compose stop
-#
 version: '4.17'
 services:
   mysql5-db:
@@ -35,10 +14,12 @@ services:
       MYSQL_USER: scott
       MYSQL_PASSWORD: tiger
     ports:
+      # IMPORTANT!!!: YOU CAN USE ANY PORT YOU WANT BUT 3306 OR YOU WON'T BE ABLE TO CONNECT TO THE SERVER.
       - 33061:3306
 
   mysql5-adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      # SET HERE THE PORT YOU WANT TO USE FOR THE WEB MYSQL ADMINER (ej: http://localhost:8080)
+      - 8080:8080  
