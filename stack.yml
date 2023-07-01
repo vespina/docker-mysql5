@@ -1,0 +1,44 @@
+#
+#     stack.yml
+#     
+#     SCRIPT FOR DOCKER COMPOSER. THIS SCRIPTS
+#     GENERATES A DOCKER CONTAINER WITH THE 
+#     FOLLOWING SERVICES:
+#     
+#     a) mysql5-db: MySQL 5.7 
+#     b) mysql5-adminer: MySql Web Admin
+#          
+#     TO BUILD:
+#     docker-compose build
+#     
+#     TO RUN:
+#     docker-compose up -d
+#     
+#     TO STOP:
+#     +34 626 23 26 06 Antonieta
+#     antonieta.martin@gmail.com
+#     docker-compose stop
+#
+version: '4.17'
+services:
+  mysql5-db:
+    image: mysql:5.7
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - "./data:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: tiger
+      MYSQL_DATABASE: test
+      MYSQL_USER: scott
+      MYSQL_PASSWORD: tiger
+    ports:
+      - 33061:3306
+
+  mysql5-adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
